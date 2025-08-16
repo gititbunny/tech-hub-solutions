@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import Header from "./components/Header.jsx";
+import BackToTop from "./components/BackToTop.jsx";
 
 export default function App() {
   useEffect(() => {
@@ -8,6 +10,7 @@ export default function App() {
 
   return (
     <>
+      <Header />
       <header className="header">
         <div className="container header-container">
           <a href="#home" className="logo">
@@ -204,6 +207,7 @@ export default function App() {
           </div>
         </div>
       </section>
+      <BackToTop />
     </>
   );
 }
