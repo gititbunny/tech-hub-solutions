@@ -1,6 +1,21 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import BackToTop from "./components/BackToTop.jsx";
+import Services from "./components/Services.jsx";
+import Products from "./components/Products.jsx";
+import Stats from "./components/Stats.jsx";
+import Testimonials from "./components/Testimonials.jsx";
+import Contact from "./components/Contact.jsx";
+import MapEmbed from "./components/MapEmbed.jsx";
+import Footer from "./components/Footer.jsx";
+import Modals from "./components/Modals.jsx";
+
+const scrollWithOffset = (hash, offset = 80) => {
+  const el = document.querySelector(hash);
+  if (!el) return;
+  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: y, behavior: "smooth" });
+};
 
 export default function App() {
   useEffect(() => {
@@ -8,100 +23,23 @@ export default function App() {
       "Tech Hub Solutions | Office Equipment Supplier | Letsitele";
   }, []);
 
+  const [productOpen, setProductOpen] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
+
+  const onAddToCart = useCallback(() => setProductOpen(true), []);
+  const onCheckout = useCallback(() => {
+    setProductOpen(false);
+    alert("Checkout functionality would be implemented here");
+  }, []);
+
+  const onSubmitSuccess = useCallback(() => setSuccessOpen(true), []);
+  const closeSuccess = useCallback(() => setSuccessOpen(false), []);
+
+  const onNav = useCallback((hash) => scrollWithOffset(hash, 80), []);
+
   return (
     <>
       <Header />
-      <header className="header">
-        <div className="container header-container">
-          <a href="#home" className="logo">
-            <img
-              src="/media/logo.png"
-              alt="Tech Hub Solutions Logo"
-              className="logo-img"
-            />
-            <span className="logo-text">Tech Hub Solutions</span>
-          </a>
-
-          <nav>
-            <ul className="nav-links">
-              <li>
-                <a href="#home">Home</a>
-              </li>
-              <li>
-                <a href="#about">About</a>
-              </li>
-              <li>
-                <a href="#services">Services</a>
-              </li>
-              <li>
-                <a href="#products">Products</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-            </ul>
-          </nav>
-
-          <button
-            className="theme-toggle"
-            id="themeToggle"
-            aria-label="Toggle theme"
-          >
-            <i className="fas fa-moon"></i>
-          </button>
-
-          <button
-            className="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open menu"
-          >
-            <i className="fas fa-bars"></i>
-          </button>
-        </div>
-      </header>
-
-      <div className="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <button
-          className="mobile-menu-close"
-          id="mobileMenuClose"
-          aria-label="Close menu"
-        >
-          <i className="fas fa-times"></i>
-        </button>
-        <ul className="mobile-nav-links">
-          <li>
-            <a href="#home" className="mobile-nav-link">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="mobile-nav-link">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#services" className="mobile-nav-link">
-              Services
-            </a>
-          </li>
-          <li>
-            <a href="#products" className="mobile-nav-link">
-              Products
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="mobile-nav-link">
-              Contact
-            </a>
-          </li>
-        </ul>
-        <button
-          className="theme-toggle mobile-theme-toggle"
-          id="mobileThemeToggle"
-        >
-          <i className="fas fa-moon"></i> Toggle Theme
-        </button>
-      </div>
 
       <section className="hero" id="home">
         <div className="container hero-container">
@@ -115,10 +53,24 @@ export default function App() {
               Tzaneen and surrounding areas.
             </p>
             <div className="hero-buttons">
-              <a href="#products" className="btn">
+              <a
+                href="#products"
+                className="btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNav("#products");
+                }}
+              >
                 Explore Products
               </a>
-              <a href="#contact" className="btn btn-outline">
+              <a
+                href="#contact"
+                className="btn btn-outline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNav("#contact");
+                }}
+              >
                 Request Service
               </a>
             </div>
@@ -142,6 +94,7 @@ export default function App() {
             Serving the Limpopo business community with reliable office
             solutions since 2015
           </p>
+
           <div className="about-container">
             <div className="about-image">
               <img
@@ -200,13 +153,35 @@ export default function App() {
                 </div>
               </div>
 
-              <a href="#contact" className="btn">
+              <a
+                href="#contact"
+                className="btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNav("#contact");
+                }}
+              >
                 Get in Touch
               </a>
             </div>
           </div>
         </div>
       </section>
+
+      <Services onNav={onNav} />
+      <Products onAddToCart={onAddToCart} onNav={onNav} />
+      <Stats />
+      <Testimonials />
+      <Contact onSubmitSuccess={onSubmitSuccess} />
+      <MapEmbed />
+      <Footer />
+      <Modals
+        productOpen={productOpen}
+        onCloseProduct={() => setProductOpen(false)}
+        onCheckout={onCheckout}
+        successOpen={successOpen}
+        onCloseSuccess={closeSuccess}
+      />
       <BackToTop />
     </>
   );
