@@ -1169,3 +1169,47 @@ body.dark-mode .modal-close {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 576px) {
+  .header-container {
+    gap: 10px;
+    padding: 16px 0;
+  }
+
+  .logo-img {
+    height: 32px;
+    margin-right: 8px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+
+  .mobile-menu-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-img {
+    height: 28px;
+  }
+  .logo-text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-img {
+    animation: none;
+  }
+  .hero-image {
+    margin-top: 16px;
+    margin-bottom: -60px;
+  }
+}
