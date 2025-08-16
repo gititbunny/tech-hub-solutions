@@ -458,6 +458,10 @@ body.dark-mode .card-text {
   color: #94a3b8;
 }
 
+body.dark-mode .card-title {
+  color: #e2e8f0;
+}
+
 .products {
   background-color: white;
 }
@@ -924,6 +928,10 @@ footer {
   margin-bottom: 15px;
 }
 
+.footer-newsletter ::placeholder {
+  color: #10b981;
+}
+
 .footer-newsletter .form-control {
   margin-bottom: 10px;
 }
@@ -1060,6 +1068,7 @@ body.dark-mode .mobile-nav-links a {
 
 body.dark-mode .modal-content {
   background-color: #1e293b;
+  color: #e2e8f0;
 }
 
 .modal.active .modal-content {
