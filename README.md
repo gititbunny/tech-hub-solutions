@@ -249,4 +249,4 @@ MIT.
 
 ## 👤 Credits
 
-Design & Engineering by **Git It Bunny**.
+Design & Engineering by **Nina Nkhwashu**.
